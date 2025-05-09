@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-light elevation-4">
 
     <!-- Brand Logo -->
     <a href="{{ route('cefa.senaempresa.index') }}" class="brand-link">
@@ -78,19 +78,11 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('cefa.senaempresa.developers') }}"
-                            class="nav-link {{ !Route::is('cefa.senaempresa.developers') ?: 'active' }}">
-                            <i class="fas fa-laptop-code"></i>
-                            <p>
-                                {{ trans('senaempresa::menu.Developers') }}
-                            </p>
-                        </a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="fas fa-vr-cardboard"></i>
-                            <p>Estrategia
+                            <p>Conoce mas
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -101,6 +93,17 @@
                                     <i class="fas fa-users"></i>
                                     <p>
                                         {{ trans('senaempresa::menu.We') }}
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('cefa.senaempresa.nosotros') }}"
+                                    class="nav-link {{ !Route::is('cefa.senaempresa.nosotros') ?: 'active' }}">
+                                    <i class="fas fa-users"></i>
+                                    <p>
+                                        {{ trans('senaempresa::menu.Contacto') }}
                                     </p>
                                 </a>
                             </li>

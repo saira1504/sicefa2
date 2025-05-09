@@ -17,7 +17,12 @@ class QualityController extends Controller
         $data = ['title' => 'Nosotros'];
         return view('senaempresa::quality.we', $data);
     }
-
+    public function contact()
+    {
+        $data = ['title' => 'Contacto'];
+        return view('senaempresa::quality.contact', $data);
+    }
+    
     /**
      * Show the form for creating a new resource.
      * @return Renderable

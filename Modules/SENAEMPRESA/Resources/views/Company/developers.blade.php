@@ -1,3 +1,4 @@
+<!--
 @extends('senaempresa::layouts.master')
 @section('stylesheet')
     <link href="{{ asset('modules/senaempresa/css/contact.css') }}" rel="stylesheet">
@@ -238,7 +239,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
             </div>
         </div>

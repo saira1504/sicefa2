@@ -61,5 +61,6 @@ Route::middleware(['lang'])->group(function () {
 
         //Rutas para quality
         Route::get('Nosotros/', 'QualityController@we')->name('cefa.senaempresa.nosotros');
+        Route::get('Contactos/', 'QualityController@we')->name('cefa.senaempresa.contactos');
     });
 });

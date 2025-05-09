@@ -1,14 +1,16 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
-    <!-- Left navbar links -->
+    <!-- Enlaces de la barra de navegación izquierda -->
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('cefa.senaempresa.index') }}"
-                class="nav-link @if (Route::is('cefa.senaempresa.*')) active @endif">{{ trans('senaempresa::menu.Home') }}</a>
-        </li>
+        <a href="{{ route('cefa.senaempresa.index') }}"
+            class="nav-link @if (Route::is('cefa.senaempresa.*')) active @endif"
+            data-toggle="tooltip"  title="{{ trans('senaempresa::menu.Home') }}">
+            <i class="fas fa-home"></i>
+        </a>
+
         @auth
             @if (checkRol('senaempresa.admin'))
                 <li class="nav-item d-none d-sm-inline-block">
@@ -42,7 +44,7 @@
         @endauth
     </ul>
 
-    <!-- Right navbar links -->
+    <!-- Enlaces de la barra de navegación derecha -->
     <ul class="navbar-nav ml-auto">
         @guest
         <li>
