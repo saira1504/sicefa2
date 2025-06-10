@@ -16,13 +16,19 @@ class SENAEMPRESADatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::beginTransaction(); // Iniciar transacción
+        Model::unguard();
 
-        $this->call(AppTableSeeder::class); // Ejecutar Seeder de aplicación
-        $this->call(RolesTableSeeder::class); // Ejecutar Seeder de roles para usuarios
-        $this->call(PermissionsTableSeeder::class); // Ejecutar Seeder de permisos para roles
-        $this->call(InventoriesTableSeeder::class); // Ejecutar Seeder de inventario
-    
-        DB::commit(); // Finalizar transacción
+        $this->call([
+            PermissionsTableSeeder::class,
+            RolesTableSeeder::class,
+            PeopleTableSeeder::class,
+            UsersTableSeeder::class,
+            AppTableSeeder::class,
+            QuartersTableSeeder::class,
+            PositionCompaniesTableSeeder::class,
+            VacanciesTableSeeder::class,
+            InventoriesTableSeeder::class,
+            SenaempresasTableSeeder::class,
+        ]);
     }
 }

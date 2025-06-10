@@ -23,6 +23,21 @@ class SENAEMPRESAController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        if ($user) {
+            $role = $user->roles->first();
+            if ($role) {
+                switch ($role->slug) {
+                    case 'senaempresa.admin':
+                        return redirect()->route('senaempresa.admin.index');
+                    case 'senaempresa.human_talent_leader':
+                        return redirect()->route('senaempresa.human_talent_leader.index');
+                    case 'senaempresa.psychologo':
+                        return redirect()->route('senaempresa.psychologo.index');
+                }
+            }
+        }
+        
         $data = ['title' => trans('senaempresa::menu.Home')];
         return view('senaempresa::index', $data);
     }
@@ -114,11 +129,21 @@ class SENAEMPRESAController extends Controller
    }
     public function Apprentice()
     {
+        $user = Auth::user();
+        if (!$user || !$user->roles->contains('slug', 'senaempresa.apprentice')) {
+            return redirect()->back()->with('error', 'No tienes permisos para acceder a esta sección');
+        }
+
         $vacanciesCount = DB::table('vacancies')
             ->where('state', 'Disponible')
             ->whereNull('deleted_at')
             ->count();
-        $data = ['title' => trans('senaempresa::menu.Apprentice'), 'vacanciesCount' => $vacanciesCount];
+
+        $data = [
+            'title' => trans('senaempresa::menu.Apprentice'),
+            'vacanciesCount' => $vacanciesCount
+        ];
+
         return view('senaempresa::Company.apprentice', $data);
     }
     public function manual_apprentice()

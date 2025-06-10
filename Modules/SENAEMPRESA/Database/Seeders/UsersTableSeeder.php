@@ -5,6 +5,7 @@ namespace Modules\SENAEMPRESA\Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Modules\SICA\Entities\Person;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,12 +16,29 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $person = Person::where('document_number', 52829681)->first(); // Consultar Persona
-        User::updateOrCreate(['nickname' => 'Lola'], [ // Actualizar o crear usuario
-            'person_id' => $person->id,
-            'email' => 'lherrerah@sena.edu.co',// lolafernandaherrera@gmail.com   Lohe9681
-        ]);
+        // Crear usuario Nataly (solo si no existe)
+        $nataly = Person::where('document_number', '123456789')->first();
+        if ($nataly) {
+            User::firstOrCreate(
+                ['email' => 'nataly@gmail.com'],
+                [
+                    'person_id' => $nataly->id,
+                    'nickname' => 'nataly',
+                    'password' => Hash::make('123456789')
+                ]
+            );
+        }
 
+        // Crear usuario Lola (solo si no existe)
+        $person = Person::where('document_number', 52829681)->first();
+        if ($person) {
+            User::firstOrCreate(
+                ['email' => 'lolafernandaherrera@gmail.com'],
+                [
+                    'person_id' => $person->id,
+                    'nickname' => 'Lola'
+                ]
+            );
+        }
     }
 }
-

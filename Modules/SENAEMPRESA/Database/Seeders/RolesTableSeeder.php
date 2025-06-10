@@ -16,7 +16,6 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-
         // Consultar aplicación SENAEMPRESA para registrar los roles
         $app = App::where('name', 'SENAEMPRESA')->first();
 
@@ -55,9 +54,14 @@ class RolesTableSeeder extends Seeder
 
         // Consulta de usuarios
         $useradmin = User::where('nickname', 'LFHerre')->first();
+        $userNataly = User::where('nickname', 'nataly')->first();
        
         // Asignacion de roles a usuarios
         $useradmin->roles()->syncWithoutDetaching([$rol_admin->id]);
-       
+        
+        // Asignar rol de aprendiz a Nataly
+        if ($userNataly) {
+            $userNataly->roles()->syncWithoutDetaching([$rol_aprendiz->id]);
+        }
     }
 }

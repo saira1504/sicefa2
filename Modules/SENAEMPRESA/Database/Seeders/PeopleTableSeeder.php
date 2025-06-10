@@ -70,5 +70,20 @@ class PeopleTableSeeder extends Seeder
             'pension_entity_id' => $pension_entity->id,
             'avatar' => 'modules/senaempresa/images/Contacto'
         ]);
+
+        // Crear o actualizar persona para Nataly
+        Person::updateOrCreate(
+            ['document_number' => '123456789'],
+            [
+                'document_type' => 'Cédula de ciudadanía',
+                'first_name' => 'NATALY',
+                'first_last_name' => 'APRENDIZ',
+                'second_last_name' => 'SENA',
+                'eps_id' => $eps->id,
+                'population_group_id' => $population_group->id,
+                'pension_entity_id' => $pension_entity->id,
+                'avatar' => 'modules/senaempresa/images/Contacto/default.jpg'
+            ]
+        );
     }
 }
