@@ -1,11 +1,11 @@
-<aside class="main-sidebar sidebar-light elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
 
     <!-- Brand Logo -->
     <a href="{{ route('cefa.senaempresa.index') }}" class="brand-link">
         <img src="{{ asset('AdminLTE/dist/img/logo P SENA.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
 
-        <span class="brand-text font-weight-light">SENA Empresa</span>
+        <span class="brand-text font-weight-light">SENA EMPRESA</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -22,14 +22,7 @@
                     @endif
                 </div>
                 @guest
-                    <div class="col info info-user">
-                        <div>{{ trans('senaempresa::menu.Welcome') }}</div>
-                        <div><a href="{{ route('login', ['redirect' => url()->current()]) }}" class="d-block">{{ trans('Auth.Login') }}</a></div>
-                    </div>
-                    <div class="col info float-right mt-2" data-toggle="tooltip" data-placement="right"
-                        title="{{ trans('Auth.Login') }}"><a href="{{ route('login', ['redirect' => url()->current()]) }}" class="d-block"><i
-                                class="fas fa-sign-in-alt"></i></a>
-                    </div>
+                  
                 @else
                     <div class="col info info-user">
                         <div data-toggle="tooltip" data-placement="top" title="{{ Auth::user()->person->full_name }}">
@@ -68,50 +61,11 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                @if (Route::is('cefa.senaempresa.*'))
-                    <li class="nav-item">
-                        <a href="{{ route('cefa.senaempresa.index') }}"
-                            class="nav-link {{ !Route::is('cefa.senaempresa.index') ?: 'active' }}">
-                            <i class="fas fa-home"></i>
-                            <p>
-                                {{ trans('senaempresa::menu.Home') }}
-                            </p>
-                        </a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-vr-cardboard"></i>
-                            <p>Conoce mas
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('cefa.senaempresa.nosotros') }}"
-                                    class="nav-link {{ !Route::is('cefa.senaempresa.nosotros') ?: 'active' }}">
-                                    <i class="fas fa-users"></i>
-                                    <p>
-                                        {{ trans('senaempresa::menu.We') }}
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('cefa.senaempresa.nosotros') }}"
-                                    class="nav-link {{ !Route::is('cefa.senaempresa.nosotros') ?: 'active' }}">
-                                    <i class="fas fa-users"></i>
-                                    <p>
-                                        {{ trans('senaempresa::menu.Contacto') }}
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                @if (Route::is('cefa.senaempresa.*'))  
                 @endif
 
                 {{-- Menú de opciones para Administrador Senaempresa --}}
+
                 @if (Route::is('senaempresa.admin.*'))
                     @if (Auth::user()->havePermission('senaempresa.admin.index'))
                         <li class="nav-item">

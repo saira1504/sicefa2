@@ -1,18 +1,12 @@
-<!--
 <div class="content-header">
     <div class="container-fluid">
-        <div id="divbreadcrumb" class="row mb-2">
+        <div id="#">
+        <div class="col-sm-6">
+                {{-- Fecha y hora eliminadas --}}
+            </div>
             <div class="col-sm-6">
-                <span id="real-time-date"></span>
-            </div><!-- /.col --
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('cefa.senaempresa.index') }}"
-                            class="text-decoration-none">SENAEMPRESA</a></li>
-                    <li class="breadcrumb-item active">{{ $title }}</li>
-                </ol>
-            </div><!-- /.col --
-        </div><!-- /.row --
-    </div><!-- /.container-fluid --
+                {{-- Espacio reservado por si se quiere agregar algo más --}}
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
