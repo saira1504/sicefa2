@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
                 ['email' => 'lolafernandaherrera@gmail.com'],
                 [
                     'person_id' => $person->id,
-                    'nickname' => 'Lola'
+                    'nickname' => 'Lola' //Lohe9681
                 ]
             );
         }
