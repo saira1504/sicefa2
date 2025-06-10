@@ -56,41 +56,37 @@ class LoginController extends Controller
 
     protected function validateLogin(Request $request)
     {
+        // Por defecto, se aplican las reglas más estrictas (para aprendices y usuarios no registrados)
+        $rules = [
+            $this->username() => 'required|string',
+            'password' => ['required', 'string', 'regex:/^[a-zA-Z0-9]+$/', 'max:15'],
+        ];
+
+        $messages = [
+            'password.regex' => 'La contraseña solo debe contener letras y números. No se permiten caracteres especiales.',
+            'password.max' => 'La contraseña no debe tener más de :max caracteres.',
+        ];
+
         $user = User::where($this->username(), $request->input($this->username()))->first();
 
         if ($user) {
-            $rules = [
-                $this->username() => 'required|string',
-                'password' => ['required', 'string'],
-            ];
-
-            $messages = [];
-
             $is_admin = $user->roles()->where('name', 'Admin')->exists();
             $is_apprentice = $user->roles()->where('name', 'Aprendiz')->exists();
 
             if ($is_admin) {
-                // Reglas para Admin: solo letras y números.
-                $rules['password'][] = 'regex:/^[a-zA-Z0-9]+$/';
+                // Para el Admin, se quita la restricción de 15 caracteres
+                $rules['password'] = ['required', 'string', 'regex:/^[a-zA-Z0-9]+$/'];
                 $messages['password.regex'] = 'La contraseña solo debe contener letras y números. No se permiten caracteres especiales (ej: ?()/%#"-).';
             } elseif ($is_apprentice) {
-                // Reglas para Aprendiz: solo letras y números, máximo 20 caracteres.
-                $rules['password'][] = 'max:20';
-                $rules['password'][] = 'regex:/^[a-zA-Z0-9]+$/';
-                $messages['password.regex'] = 'La contraseña solo debe contener letras y números. No se permiten caracteres especiales (ej: &%$#"!=?¿*+-).';
-                $messages['password.max'] = 'La contraseña no puede tener más de :max caracteres.';
+                // Para el Aprendiz, solo se personaliza el mensaje de error de los caracteres
+                 $messages['password.regex'] = 'La contraseña solo debe contener letras y números. No se permiten caracteres especiales (ej: &%$#"!=?¿*+-).';
             }
+        }
+        
+        $validator = Validator::make($request->all(), $rules, $messages);
 
-            $validator = Validator::make($request->all(), $rules, $messages);
-
-            if ($validator->fails()) {
-                throw new ValidationException($validator);
-            }
-        } else {
-             $request->validate([
-                $this->username() => 'required|string',
-                'password' => 'required|string',
-            ]);
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
         }
     }
 
